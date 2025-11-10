@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/*:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}*/
+:root{
+  --bg: #0a0f1b;
+  --panel: #0f1629;
+  --text: #e6f0ff;
+  --muted: #9ab0d1;
+  --primary: #3bc7ff;      /* 霓虹蓝 */
+  --primary-2: #6bf5ff;    /* 更亮的蓝青 */
+  --glow: 0 0 24px rgba(59,199,255,.45), 0 0 64px rgba(107,245,255,.25);
+}
+html, body { background: var(--bg); color: var(--text); }
+
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
