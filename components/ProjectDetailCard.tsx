@@ -3,20 +3,24 @@
 import Card from "./ui/Card";
 import Link from "next/link";
 
-interface ProjectCardProps {
+interface ProjectDetailCardProps {
   title: string;
   description: string;
+  details?: string;
   tech: string[];
   link?: string;
   projectId: string;
 }
 
-export default function ProjectCard({
+export default function ProjectDetailCard({
   title,
   description,
+  details,
   tech,
   projectId,
-}: ProjectCardProps) {
+}: ProjectDetailCardProps) {
+  // Use details if available, otherwise fall back to description
+  const displayText = details || description;
 
   return (
     <Link href={`/projects#project-${projectId}`} className="block">
@@ -39,7 +43,7 @@ export default function ProjectCard({
             />
           </svg>
         </div>
-        <p className="text-slate-600 mb-4 leading-relaxed">{description}</p>
+        <p className="text-slate-600 mb-4 leading-relaxed whitespace-pre-line">{displayText}</p>
         <div className="flex flex-wrap gap-2">
           {tech.map((item) => (
             <span
@@ -54,3 +58,4 @@ export default function ProjectCard({
     </Link>
   );
 }
+

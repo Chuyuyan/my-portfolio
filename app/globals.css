@@ -1,37 +1,286 @@
 @import "tailwindcss";
 
-/*:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}*/
-:root{
-  --bg: #0a0f1b;
-  --panel: #0f1629;
-  --text: #e6f0ff;
-  --muted: #9ab0d1;
-  --primary: #3bc7ff;      /* 霓虹蓝 */
-  --primary-2: #6bf5ff;    /* 更亮的蓝青 */
-  --glow: 0 0 24px rgba(59,199,255,.45), 0 0 64px rgba(107,245,255,.25);
-}
-html, body { background: var(--bg); color: var(--text); }
-
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+/* Enable dark mode class strategy for Tailwind v4 */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: light;
+  }
+  
+  .dark {
+    color-scheme: dark;
   }
 }
 
+/* Design Tokens - Tailwind v4 Theme Extension */
+@theme {
+  /* Color Palette - 统一配色系统 */
+  --color-primary: #2563eb;        /* blue-600 - 主色 */
+  --color-primary-hover: #1d4ed8;  /* blue-700 - 主色悬停 */
+  --color-primary-light: #dbeafe;  /* blue-50 - 主色浅色 */
+  --color-primary-dark: #1e40af;   /* blue-800 - 主色深色 */
+  
+  --color-accent: #3b82f6;         /* blue-500 - 辅助色 */
+  
+  /* Neutral Colors - Light Mode */
+  --color-background: #f9fafb;     /* gray-50 - 背景 */
+  --color-surface: #ffffff;        /* white - 卡片背景 */
+  --color-border: #e5e7eb;         /* gray-200 - 边框 */
+  
+  /* Text Colors - Light Mode */
+  --color-text-primary: #111827;   /* gray-900 - 主要文字 */
+  --color-text-secondary: #4b5563; /* gray-600 - 次要文字 */
+  --color-text-muted: #6b7280;     /* gray-500 - 辅助文字 */
+  --color-text-inverse: #ffffff;   /* white - 反色文字 */
+  
+  /* Font Family */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* Typography Scale */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Spacing Scale (基于 Tailwind 4px 基准) */
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 0.75rem;   /* 12px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-full: 9999px;   /* 圆形 */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Dark Mode Colors */
+.dark {
+  --color-background: #111827;     /* gray-900 - 背景 */
+  --color-surface: #1f2937;        /* gray-800 - 卡片背景 */
+  --color-border: #374151;         /* gray-700 - 边框 */
+  --color-text-primary: #f9fafb;   /* gray-50 - 主要文字 */
+  --color-text-secondary: #d1d5db; /* gray-300 - 次要文字 */
+  --color-text-muted: #9ca3af;     /* gray-400 - 辅助文字 */
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8fafc !important; /* slate-50 - 更有质感的浅灰背景 */
+  color: #0f172a !important; /* slate-900 - 更柔和的深色文字 */
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* 极淡的点阵纹理背景 - 增加专业感 */
+  background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.15) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.dark body {
+  background-color: #111827 !important; /* gray-900 - dark mode */
+  color: #f9fafb !important; /* gray-50 - dark mode */
+}
+
+/* Force dark mode styles for main elements - Tailwind v4 fix */
+.dark main {
+  background-color: #111827 !important;
+  color: #ffffff !important;
+}
+
+.dark main.bg-slate-50,
+.dark main.bg-gray-50 {
+  background-color: #111827 !important;
+}
+
+.dark main.bg-gradient-to-b {
+  background: linear-gradient(to bottom, #111827, #1f2937) !important;
+  background-color: #111827 !important;
+}
+
+/* CRITICAL: First, restore Card (bg-white) text colors to original values - highest priority */
+html.dark main .bg-white .text-gray-900 {
+  color: #111827 !important; /* gray-900 */
+}
+
+html.dark main .bg-white .text-gray-800 {
+  color: #1f2937 !important; /* gray-800 */
+}
+
+html.dark main .bg-white .text-gray-700 {
+  color: #374151 !important; /* gray-700 */
+}
+
+html.dark main .bg-white .text-gray-600 {
+  color: #4b5563 !important; /* gray-600 */
+}
+
+html.dark main .bg-white .text-gray-500 {
+  color: #6b7280 !important; /* gray-500 */
+}
+
+html.dark main .bg-white .text-gray-400 {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+html.dark main .bg-white .text-blue-700 {
+  color: #1d4ed8 !important; /* blue-700 */
+}
+
+html.dark main .bg-white .text-blue-600 {
+  color: #2563eb !important; /* blue-600 */
+}
+
+/* Reset Button text colors */
+html.dark main button,
+html.dark main button *,
+html.dark main a.bg-blue-600,
+html.dark main a.bg-blue-600 *,
+html.dark main a.bg-gray-100,
+html.dark main a.bg-gray-100 *,
+html.dark main a.bg-transparent[class*="text-gray-700"],
+html.dark main a.bg-transparent[class*="text-gray-700"] * {
+  color: inherit !important;
+}
+
+/* Now force text in main sections to be white, but EXCLUDE cards and buttons */
+html.dark main section h1:not(.bg-white h1):not(.bg-white *),
+html.dark main section h2:not(.bg-white h2):not(.bg-white *),
+html.dark main section h3:not(.bg-white h3):not(.bg-white *),
+html.dark main section p:not(.bg-white p):not(.bg-white *),
+html.dark main section a:not(.bg-white a):not(button):not([class*="bg-blue-600"]):not([class*="bg-gray-100"]):not([class*="bg-slate-50"]) {
+  color: #ffffff !important;
+}
+
+/* Override text-gray and text-slate classes, but EXCLUDE anything inside .bg-white (Card component) */
+html.dark main section .text-gray-900:not(.bg-white .text-gray-900):not(.bg-white *),
+html.dark main section .text-gray-800:not(.bg-white .text-gray-800):not(.bg-white *),
+html.dark main section .text-gray-700:not(.bg-white .text-gray-700):not(.bg-white *),
+html.dark main section .text-gray-600:not(.bg-white .text-gray-600):not(.bg-white *),
+html.dark main section .text-slate-900:not(.bg-white .text-slate-900):not(.bg-white *),
+html.dark main section .text-slate-800:not(.bg-white .text-slate-800):not(.bg-white *),
+html.dark main section .text-slate-700:not(.bg-white .text-slate-700):not(.bg-white *),
+html.dark main section .text-slate-600:not(.bg-white .text-slate-600):not(.bg-white *) {
+  color: #ffffff !important;
+}
+
+/* Utility Classes for Container */
+.container {
+  @apply mx-auto px-6;
+  max-width: 1280px;
+}
+
+.container-sm {
+  @apply mx-auto px-6;
+  max-width: 896px; /* max-w-4xl */
+}
+
+.container-lg {
+  @apply mx-auto px-6;
+  max-width: 1024px; /* max-w-5xl */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out both;
+}
+
+/* Smooth scroll reveal */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  
+  .fade-in-up,
+  .fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Link underline animation utility */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease-out;
+}
+
+.link-underline:hover::after {
+  width: 100%;
 }

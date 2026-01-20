@@ -9,26 +9,27 @@ export type Experience = {
   
   export const experience: Experience[] = [
     {
-      company: "Suzhou Dingke Medical Technology",
-      role: "Software Engineer Intern",
-      time: "2025.10 – 2026.01",
-      location: "Suzhou / Remote",
+      company: "Dingke Medical Technology",
+      role: "Software Engineering Intern",
+      time: "September 2025 – December 2025",
+      location: "",
       points: [
-        "Built automation tools with Python + Selenium for data collection.",
-        "Designed Flask APIs to serve crawled patent & scholar data (JSONL).",
-        "Implemented role-based access (guest/paid) and WeChat Mini Program integration.",
+        "Designed a hybrid code search pipeline combining keyword retrieval (ripgrep) and FAISS-based semantic search, returning top-6 ranked code evidence with improved precision.",
+        "Built a scalable FAISS IndexFlatIP vector index supporting thousands to tens of thousands of code chunks (384-d embeddings), with disk persistence, incremental updates, and optional in-memory privacy mode.",
+        "Developed a unified multi-LLM orchestration layer supporting DeepSeek, OpenAI, Anthropic, and Qwen, with response caching, automatic retries, and configurable streaming workflows for code analysis tasks.",
       ],
+      link: "https://github.com/yourname"
     },
     {
-      company: "Personal Project — Patent & Scholar Assistant",
-      role: "Full-stack Developer",
-      time: "2024 – Now",
+      company: "Kangyu Medical Devices",
+      role: "Research and Development Assistant Intern",
+      time: "June 2025 – April 2025",
+      location: "",
       points: [
-        "Next.js + Tailwind 前端、Flask 后端、Selenium 爬虫、JSONL 存储。",
-        "实现 PDF 缓存展示、智能摘要（DeepSeek）、收藏/历史记录、分页加载。",
-        "计划接入部署（Nginx + Gunicorn）与公网域名，优化可用性与可靠性。",
+        "Built a fully automated PDF metadata extraction pipeline processing 800 academic papers, extracting titles, authors, publication years, and venues into structured Excel outputs.",
+        "Implemented robust PDF parsing and OCR workflows with image preprocessing (noise reduction and enhancement) to reliably handle heterogeneous formats and low-quality scans.",
+        "Eliminated manual data curation, reducing processing time from 2 minutes per document to near-zero manual effort.",
       ],
-      link: "https://github.com/your/repo"
     }
   ];
   
