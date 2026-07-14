@@ -7,6 +7,7 @@ export type Project = {
   features?: string[];
   challenges?: string[];
   image?: string;
+  diagram?: "code-search";
 };
 
 export const projects: Project[] = [
@@ -59,6 +60,7 @@ export const projects: Project[] = [
     description:
       "Built a production-style code analysis system combining keyword search and vector-based semantic retrieval.",
     tech: ["Python", "Flask", "FAISS", "Embeddings", "LLM APIs"],
+    diagram: "code-search",
     details:
       "Built a production-style AI-assisted code analysis platform combining keyword-based search with vector-based semantic retrieval. Designed a hybrid retrieval pipeline integrating traditional text search with embedding-based similarity search using FAISS. Implemented code chunking, indexing, and ranking strategies to surface high-quality context for downstream analysis. Developed a unified multi-LLM orchestration layer supporting multiple providers, with response caching, retry logic, and configurable workflows, enabling scalable semantic code understanding across large repositories.",
     features: [

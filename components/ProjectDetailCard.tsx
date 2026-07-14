@@ -2,6 +2,7 @@
 
 import Card from "./ui/Card";
 import Link from "next/link";
+import CodeSearchDiagram from "./diagrams/CodeSearchDiagram";
 
 interface ProjectDetailCardProps {
   title: string;
@@ -10,6 +11,7 @@ interface ProjectDetailCardProps {
   tech: string[];
   link?: string;
   projectId: string;
+  diagram?: "code-search";
 }
 
 export default function ProjectDetailCard({
@@ -18,6 +20,7 @@ export default function ProjectDetailCard({
   details,
   tech,
   projectId,
+  diagram,
 }: ProjectDetailCardProps) {
   // Use details if available, otherwise fall back to description
   const displayText = details || description;
@@ -44,6 +47,7 @@ export default function ProjectDetailCard({
           </svg>
         </div>
         <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed whitespace-pre-line">{displayText}</p>
+        {diagram === "code-search" && <CodeSearchDiagram />}
         <div className="flex flex-wrap gap-2">
           {tech.map((item) => (
             <span
