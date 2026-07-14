@@ -18,12 +18,11 @@ export type Experience = {
         "Built a scalable FAISS IndexFlatIP vector index supporting thousands to tens of thousands of code chunks (384-d embeddings), with disk persistence, incremental updates, and optional in-memory privacy mode.",
         "Developed a unified multi-LLM orchestration layer supporting DeepSeek, OpenAI, Anthropic, and Qwen, with response caching, automatic retries, and configurable streaming workflows for code analysis tasks.",
       ],
-      link: "https://github.com/yourname"
     },
     {
       company: "Kangyu Medical Devices",
       role: "Research and Development Assistant Intern",
-      time: "June 2025 – April 2025",
+      time: "April 2025 – June 2025",
       location: "",
       points: [
         "Built a fully automated PDF metadata extraction pipeline processing 800 academic papers, extracting titles, authors, publication years, and venues into structured Excel outputs.",

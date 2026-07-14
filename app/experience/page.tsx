@@ -5,7 +5,7 @@ import { experience } from "@/data/experience";
 
 // Metadata configuration for the experience page
 export const metadata = {
-  title: "Experience — 宝贝的个人网站",
+  title: "Experience — Chuyu Yan",
   description: "Internships and work experience",
 };
 export default function ExperiencePage() {

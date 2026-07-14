@@ -26,7 +26,7 @@ export default function ProjectDetailCard({
     <Link href={`/projects#project-${projectId}`} className="block">
       <Card hover className="group cursor-pointer">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="font-semibold text-xl mb-2 text-slate-900 group-hover:text-blue-600 transition-colors">
+          <h3 className="font-semibold text-xl mb-2 text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
             {title}
           </h3>
           <svg
@@ -43,12 +43,12 @@ export default function ProjectDetailCard({
             />
           </svg>
         </div>
-        <p className="text-slate-600 mb-4 leading-relaxed whitespace-pre-line">{displayText}</p>
+        <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed whitespace-pre-line">{displayText}</p>
         <div className="flex flex-wrap gap-2">
           {tech.map((item) => (
             <span
               key={item}
-              className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors"
+              className="px-3 py-1 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
             >
               {item}
             </span>

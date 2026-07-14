@@ -18,8 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "宝贝的个人网站",
-  description: "Portfolio built with Next.js + Tailwind CSS",
+  title: "Chuyu Yan — Software Engineer",
+  description:
+    "Chuyu Yan — software engineer focused on automation, document intelligence, and AI/LLM systems.",
 };
 
 export default function RootLayout({

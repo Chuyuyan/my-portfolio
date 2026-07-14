@@ -9,7 +9,7 @@ const CONTACT = {
 };
 
 export const metadata = {
-  title: "Contact — 宝贝的个人网站",
+  title: "Contact — Chuyu Yan",
   description: "Get in touch",
 };
 
@@ -26,13 +26,13 @@ function ContactCard({
       className="block"
     >
       <Card hover className="group cursor-pointer">
-        <div className="text-base font-semibold text-slate-900 group-hover:text-blue-600 transition-colors relative inline-block mb-2">
+        <div className="text-base font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors relative inline-block mb-2">
           <span className="relative">
             {title}
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300 ease-out" />
           </span>
         </div>
-        <div className="text-slate-600 text-sm mt-1">{desc}</div>
+        <div className="text-slate-600 dark:text-slate-300 text-sm mt-1">{desc}</div>
       </Card>
     </a>
   );
