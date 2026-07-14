@@ -21,7 +21,7 @@ function ContactCard({
   return (
     <a
       href={href}
-      download={isResume ? "Chuyu-Yan-resume-2026-1-6.pdf" : undefined}
+      download={isResume ? "Chuyu-Yan-Resume.pdf" : undefined}
       {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className="block"
     >

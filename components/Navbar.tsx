@@ -66,26 +66,26 @@ export default function Navbar() {
       <nav
         className={`w-full flex justify-between items-center px-8 py-4 fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/80 backdrop-blur-xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)] border-b border-slate-200/40"
-            : "bg-white/70 backdrop-blur-lg shadow-sm"
+            ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)] border-b border-slate-200/40 dark:border-gray-800/60"
+            : "bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg shadow-sm"
         }`}
       >
-        <Link href="/" className="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors group relative">
+        <Link href="/" className="text-xl font-semibold text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group relative">
           <span className="relative">
             Chuyu Yan
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300 ease-out" />
           </span>
         </Link>
         <div className="flex items-center gap-6">
-          <ul className="flex space-x-6 text-gray-600">
+          <ul className="flex space-x-6 text-gray-600 dark:text-gray-300">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
                 className={`relative px-2 py-1 text-sm font-medium transition-colors group ${
                   isActive(item)
-                    ? "text-blue-600"
-                    : "text-gray-600 hover:text-gray-900"
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                 }`}
               >
                 <span className="relative">
@@ -102,9 +102,9 @@ export default function Navbar() {
           ))}
           <li>
             <a
-              href="/Chuyu Yan resume 2026-1-6.pdf"
-              download="Chuyu-Yan-resume-2026-1-6.pdf"
-              className="px-2 py-1 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors group relative"
+              href="/Chuyu-Yan-Resume.pdf"
+              download="Chuyu-Yan-Resume.pdf"
+              className="px-2 py-1 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors group relative"
             >
               <span className="relative">
                 Resume
