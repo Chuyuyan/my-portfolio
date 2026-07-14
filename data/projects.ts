@@ -12,6 +12,28 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Code Search & Developer Tooling Platform",
+    description:
+      "Built a VS Code extension with a Webview-based chat interface, bringing in-editor semantic code search and AI-assisted developer workflows directly into the editor.",
+    tech: ["React 18", "TypeScript", "Vite", "Flask", "FAISS", "Tree-sitter", "Docker"],
+    details:
+      "Developed a developer tooling platform that surfaces semantic code search and AI-assisted workflows inside the editor. Built a VS Code extension with a Webview-based chat interface, backed by a Flask service that performs hybrid retrieval over a FAISS index. Implemented incremental Tree-sitter AST indexing with file monitoring so that repository updates are reflected with low latency, and built a real-time developer dashboard using React, TypeScript, and Server-Sent Events (SSE) for interactive code analysis.",
+    features: [
+      "VS Code extension with Webview-based chat for in-editor semantic search",
+      "Incremental Tree-sitter AST indexing with file monitoring for low-latency updates",
+      "Real-time developer dashboard using React, TypeScript, and Server-Sent Events (SSE)",
+      "Hybrid retrieval backed by a FAISS index over parsed code",
+      "Containerized services for reproducible local and cloud deployment",
+    ],
+    challenges: [
+      "Keeping the AST index fresh under rapid file changes without full re-indexing",
+      "Streaming analysis results to the dashboard with low latency via SSE",
+      "Designing a responsive Webview chat that feels native to the editor",
+      "Coordinating the extension, Flask service, and dashboard as one system",
+      "Balancing indexing throughput against editor responsiveness",
+    ],
+  },
+  {
     title: "Hospital Integration Automation",
     description:
       "Built automation scripts to transfer structured patient data from isolated hospital intranet systems into third-party case management platforms.",

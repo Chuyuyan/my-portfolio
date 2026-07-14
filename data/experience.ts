@@ -28,9 +28,11 @@ export type Experience = {
       time: "September 2025 – December 2025",
       location: "Suzhou, China",
       points: [
-        "Designed a hybrid code search pipeline combining keyword retrieval (ripgrep) and FAISS-based semantic search, returning top-6 ranked code evidence with improved precision.",
-        "Built a scalable FAISS IndexFlatIP vector index supporting thousands to tens of thousands of code chunks (384-d embeddings), with disk persistence, incremental updates, and optional in-memory privacy mode.",
-        "Developed a unified multi-LLM orchestration layer supporting DeepSeek, OpenAI, Anthropic, and Qwen, with response caching, automatic retries, and configurable streaming workflows for code analysis tasks.",
+        "Designed and deployed a hybrid code search platform built on Flask REST APIs, integrating ripgrep and FAISS (IndexFlatIP) retrieval to support 1,000+ concurrent users.",
+        "Built scalable FAISS indexing with incremental updates across 2,000+ repositories and 50k+ code chunks, combining vector similarity with keyword search to improve retrieval accuracy by 60%.",
+        "Designed multi-tenant repository storage using SQLite, SQLAlchemy ORM, JWT, and RBAC, securing 20+ REST endpoints for 500+ registered users.",
+        "Implemented multi-provider LLM orchestration with caching and exponential backoff retry logic, reducing API costs by 40%.",
+        "Containerized services with Docker and deployed to an Alibaba Cloud Linux VM using Gunicorn and Nginx, achieving 99.9% uptime.",
       ],
     },
     {
