@@ -38,32 +38,12 @@
   /* Font Family */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
-  /* Typography Scale */
-  --font-size-xs: 0.75rem;      /* 12px */
-  --font-size-sm: 0.875rem;     /* 14px */
-  --font-size-base: 1rem;       /* 16px */
-  --font-size-lg: 1.125rem;     /* 18px */
-  --font-size-xl: 1.25rem;      /* 20px */
-  --font-size-2xl: 1.5rem;      /* 24px */
-  --font-size-3xl: 1.875rem;    /* 30px */
-  --font-size-4xl: 2.25rem;     /* 36px */
-  
-  /* Font Weights */
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  
-  /* Spacing Scale (基于 Tailwind 4px 基准) */
-  --spacing-xs: 0.5rem;    /* 8px */
-  --spacing-sm: 0.75rem;   /* 12px */
-  --spacing-md: 1rem;      /* 16px */
-  --spacing-lg: 1.5rem;    /* 24px */
-  --spacing-xl: 2rem;      /* 32px */
-  --spacing-2xl: 3rem;     /* 48px */
-  --spacing-3xl: 4rem;     /* 64px */
-  
+
+  /* NOTE: Do not add custom --spacing-* or --font-size-* keys here.
+     In Tailwind v4 they hijack the width/max-width and text scales
+     (e.g. max-w-2xl would resolve to --spacing-2xl instead of the
+     container scale). Use Tailwind's built-in scales instead. */
+
   /* Border Radius */
   --radius-sm: 0.375rem;   /* 6px */
   --radius-md: 0.5rem;     /* 8px */
@@ -109,88 +89,6 @@ body {
 .dark body {
   background-color: #111827 !important; /* gray-900 - dark mode */
   color: #f9fafb !important; /* gray-50 - dark mode */
-}
-
-/* Force dark mode styles for main elements - Tailwind v4 fix */
-.dark main {
-  background-color: #111827 !important;
-  color: #ffffff !important;
-}
-
-.dark main.bg-slate-50,
-.dark main.bg-gray-50 {
-  background-color: #111827 !important;
-}
-
-.dark main.bg-gradient-to-b {
-  background: linear-gradient(to bottom, #111827, #1f2937) !important;
-  background-color: #111827 !important;
-}
-
-/* CRITICAL: First, restore Card (bg-white) text colors to original values - highest priority */
-html.dark main .bg-white .text-gray-900 {
-  color: #111827 !important; /* gray-900 */
-}
-
-html.dark main .bg-white .text-gray-800 {
-  color: #1f2937 !important; /* gray-800 */
-}
-
-html.dark main .bg-white .text-gray-700 {
-  color: #374151 !important; /* gray-700 */
-}
-
-html.dark main .bg-white .text-gray-600 {
-  color: #4b5563 !important; /* gray-600 */
-}
-
-html.dark main .bg-white .text-gray-500 {
-  color: #6b7280 !important; /* gray-500 */
-}
-
-html.dark main .bg-white .text-gray-400 {
-  color: #9ca3af !important; /* gray-400 */
-}
-
-html.dark main .bg-white .text-blue-700 {
-  color: #1d4ed8 !important; /* blue-700 */
-}
-
-html.dark main .bg-white .text-blue-600 {
-  color: #2563eb !important; /* blue-600 */
-}
-
-/* Reset Button text colors */
-html.dark main button,
-html.dark main button *,
-html.dark main a.bg-blue-600,
-html.dark main a.bg-blue-600 *,
-html.dark main a.bg-gray-100,
-html.dark main a.bg-gray-100 *,
-html.dark main a.bg-transparent[class*="text-gray-700"],
-html.dark main a.bg-transparent[class*="text-gray-700"] * {
-  color: inherit !important;
-}
-
-/* Now force text in main sections to be white, but EXCLUDE cards and buttons */
-html.dark main section h1:not(.bg-white h1):not(.bg-white *),
-html.dark main section h2:not(.bg-white h2):not(.bg-white *),
-html.dark main section h3:not(.bg-white h3):not(.bg-white *),
-html.dark main section p:not(.bg-white p):not(.bg-white *),
-html.dark main section a:not(.bg-white a):not(button):not([class*="bg-blue-600"]):not([class*="bg-gray-100"]):not([class*="bg-slate-50"]) {
-  color: #ffffff !important;
-}
-
-/* Override text-gray and text-slate classes, but EXCLUDE anything inside .bg-white (Card component) */
-html.dark main section .text-gray-900:not(.bg-white .text-gray-900):not(.bg-white *),
-html.dark main section .text-gray-800:not(.bg-white .text-gray-800):not(.bg-white *),
-html.dark main section .text-gray-700:not(.bg-white .text-gray-700):not(.bg-white *),
-html.dark main section .text-gray-600:not(.bg-white .text-gray-600):not(.bg-white *),
-html.dark main section .text-slate-900:not(.bg-white .text-slate-900):not(.bg-white *),
-html.dark main section .text-slate-800:not(.bg-white .text-slate-800):not(.bg-white *),
-html.dark main section .text-slate-700:not(.bg-white .text-slate-700):not(.bg-white *),
-html.dark main section .text-slate-600:not(.bg-white .text-slate-600):not(.bg-white *) {
-  color: #ffffff !important;
 }
 
 /* Utility Classes for Container */
