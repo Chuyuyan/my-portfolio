@@ -34,7 +34,7 @@ const experienceSnapshot = [
   },
   {
     company: "Kangyu Medical",
-    role: "R&D Assistant Intern",
+    role: "Software R&D Intern",
     blurb:
       "Built OCR and automation pipelines for low-quality medical documents.",
   },

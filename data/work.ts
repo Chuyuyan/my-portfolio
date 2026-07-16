@@ -474,7 +474,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "A Selenium automation system that migrates structured patient data from an isolated hospital intranet into third-party platforms, deployed in production at a Grade III Class A hospital.",
     year: "2025",
-    role: "R&D Assistant Intern · Kangyu Medical",
+    role: "Software R&D Intern · Kangyu Medical",
     status: "Deployed in production",
     tech: ["Python", "Selenium WebDriver", "Multi-threading", "Schema validation", "JSON logging"],
     sections: [
@@ -501,7 +501,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "My role",
-        body: "R&D Assistant Intern at Kangyu Medical. I built the OCR and automation pipelines for low-quality medical documents, including the migration tool described here, and owned its reliability in a live hospital environment.",
+        body: "Software R&D Intern at Kangyu Medical. I built the OCR and automation pipelines for low-quality medical documents, including the migration tool described here, and owned its reliability in a live hospital environment.",
       },
       {
         heading: "Architecture",
