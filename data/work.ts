@@ -33,6 +33,12 @@ export type Comparison = {
   after: { label: string; points: string[] };
 };
 
+/** A single step in a repeatable loop, shown as a numbered vertical flow. */
+export type FlowStep = {
+  step: string;
+  detail: string;
+};
+
 export type WorkSection = {
   heading: string;
   body?: string;
@@ -45,6 +51,8 @@ export type WorkSection = {
   cards?: ChallengeCard[];
   /** A before/after comparison block. */
   comparison?: Comparison;
+  /** A numbered vertical flow (used by "The playable loop"). */
+  flow?: FlowStep[];
   /** Render the case study's architecture diagram inside this section. */
   showDiagram?: boolean;
 };
@@ -210,102 +218,146 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "investment-time-machine",
     title: "Investment Time Machine",
-    kicker: "Product Design · Interactive Learning · Finance",
+    kicker: "Interactive Learning · Behavioral Design · Historical Markets",
     accent: "amber",
     tagline:
-      "A playable learning experience that helps beginners build confidence through discovery, evidence, and their own decisions.",
+      "A playable historical market experience where beginners investigate real companies, allocate limited capital, live through the COVID crash, and reflect on how they made decisions.",
     angle: "Teaching investing by changing behavior — not by teaching knowledge.",
     summary:
-      "An educational simulation — a pixel-art game where you relive real market history, decide under genuine uncertainty, then a Decision Autopsy reveals the behavioral biases you couldn't see in the moment. Not financial advice; a learning experience.",
+      "A playable capital-allocation experiment built around real companies, prices, and market events from 2019 to 2021 — investigate, allocate $10,000, advance through history, and reflect on how you decided. A learning experience, not financial advice.",
     year: "2026",
     role: "Solo — design & engineering",
-    status: "Playable prototype · iterating on discovery & engagement",
-    tech: ["React", "Vite", "JavaScript", "Canvas", "localStorage", "Pure engine + tests"],
-    repoUrl: "https://github.com/Chuyuyan",
+    status: "Playable Prototype",
+    tech: ["React", "Vite", "JavaScript", "SVG", "State machine", "Static site"],
+    repoUrl: "https://github.com/Chuyuyan/investment-time-machine",
     sections: [
       {
         heading: "The problem",
-        body: "Beginners don't fail on facts — they fail on behavior: FOMO, panic-selling, overconfidence. Courses teach concepts, but the people who most need help are allergic to courses, and no one ever shows them their own behavior.",
+        body: "Many beginners already know they should start investing, yet still hesitate. The barrier isn't always missing information — it's the fear of making the wrong decision with real money. I wanted to make that first decision safe to practice, without making it feel like homework.",
       },
       {
-        heading: "Why this is difficult",
+        heading: "Why a game?",
+        body: "Delivering the idea mattered as much as developing it. A course could explain valuation or diversification, but it wouldn't necessarily reduce the emotional resistance that stops someone from starting. A game creates curiosity, gives decisions consequences, and lets players learn through action rather than instruction.",
         cards: [
           {
-            title: "Behavior, not facts",
-            note: "Beginners fail on psychology — FOMO, panic, overconfidence — not on missing knowledge.",
+            title: "Curiosity before instruction",
+            note: "Players begin by exploring real companies, so the motivation to learn comes from wanting to know — not from being told.",
           },
           {
-            title: "Course-averse audience",
-            note: "The people who most need help won't sit through a finance course.",
+            title: "Tradeoffs before theory",
+            note: "Limited capital forces real choices, so diversification and position sizing are felt before they're ever named.",
           },
           {
-            title: "Invisible bias",
-            note: "No one ever shows a beginner their own decision-making, so the failure stays invisible.",
-          },
-          {
-            title: "Honest and safe",
-            note: "It has to teach real behavior without ever giving financial advice.",
+            title: "Reflection before grading",
+            note: "The experience ends by mirroring how you decided, not by scoring whether you won.",
           },
         ],
       },
       {
         heading: "My role",
-        body: "Solo project — I designed the product and built all of it: the content model, a pure unit-tested game engine, and the React UI. The interesting work was less about code and more about deciding what the experience needed to make a beginner curious enough to begin.",
+        body: "Solo project — I designed the experience and built the whole prototype: the content model, the state machine that drives the loop, the behavioral reflection, and the React UI. The interesting work was less about code and more about deciding what the experience needed to make a beginner curious enough to begin.",
       },
       {
-        heading: "Architecture",
-        body: "Content, engine, and presentation are deliberately separated. Game content (a 3-day AI-boom campaign and the motivation library) lives in JSON; a pure, unit-tested engine computes portfolio math, decision-quality scoring, and a behavioral \"Investor DNA\" vector; a React UI renders it. The core loop: relive a historical event → decide under fog-of-war (three competing signals plus a planted red herring) → tap one motivation that silently carries a seven-trait fingerprint → repeat for three days → Decision Autopsy.",
-      },
-      {
-        heading: "Key engineering decisions",
-        decisions: [
+        heading: "The playable loop",
+        body: "The core is short and repeatable — the same handful of actions, played across six real moments in market history.",
+        flow: [
           {
-            decision: "Make the player uncover evidence instead of being lectured.",
-            why: "The audience that most needs this is allergic to courses; learning that feels earned keeps them curious enough to continue.",
-            tradeoff:
-              "Slower to teach a given concept than just stating it, and harder to author — but retention and motivation are the whole point.",
+            step: "Investigate",
+            detail:
+              "Explore five real companies — historical prices, valuation labels, real news, and public sentiment from that moment.",
           },
           {
-            decision: "Carry decisions forward as a persistent portfolio rather than resetting each round.",
-            why: "Choices only feel weighty when they have downstream consequences the player has to live with.",
-            tradeoff:
-              "More state to manage and balance than independent puzzles, at the benefit of genuine stakes.",
+            step: "Allocate capital",
+            detail:
+              "Start with $10,000. Place capital into companies or deliberately keep cash — every buy competes for limited money.",
           },
           {
-            decision: "Score decision quality in the Decision Autopsy, not whether the trade paid off.",
-            why: "Outcome bias is the exact failure the product fights; rewarding good process even when it loses is what breaks it.",
-            tradeoff:
-              "Less immediately satisfying than a P&L number, but it teaches the right lesson.",
+            step: "Advance time",
+            detail:
+              "Move to the next of six real moments from January 2019 to December 2021, including the COVID crash.",
           },
           {
-            decision: "Fake the engine on purpose — decision-quality as a lookup table, alternate timelines hardcoded.",
-            why: "To a first-time player it's indistinguishable from a real engine, and it lets me validate the emotional truth of the loop before investing in the hard modeling.",
-            tradeoff:
-              "Doesn't generalize beyond the authored scenario yet — deliberate: build the real engine only if the bet lands.",
+            step: "See market consequences",
+            detail:
+              "The market answers loudly — real prices move, and your portfolio reacts to what actually happened.",
+          },
+          {
+            step: "Reflect",
+            detail:
+              "A behavioral mirror shows reallocation frequency, biggest concentration, and how you behaved during the crash.",
           },
         ],
       },
       {
-        heading: "Tradeoffs",
+        heading: "What makes it difficult",
+        cards: [
+          {
+            title: "Real data without hindsight",
+            note: "Prices and news are real, but the interface can't reveal what happens next — the player has to decide the way people actually did, without knowing the ending.",
+          },
+          {
+            title: "Outcomes without grading",
+            note: "The market shows consequences, but the design deliberately avoids a win/lose score that would reward luck over judgment.",
+          },
+          {
+            title: "Capital is finite",
+            note: "With only $10,000, every buy competes with another — scarcity is what turns clicks into genuine tradeoffs.",
+          },
+          {
+            title: "History must stay emotionally engaging",
+            note: "The events already happened, so the challenge is making a known past feel uncertain, tense, and worth living through.",
+          },
+        ],
+      },
+      {
+        heading: "Key product decisions",
+        decisions: [
+          {
+            decision: "One era, not an endless simulator.",
+            why: "Anchoring to a single 2019–2021 market era with real events lets me design tension, pacing, and lessons deliberately — an endless random simulator would dilute all three.",
+            tradeoff:
+              "Less replay variety and no 'infinite' market, in exchange for a tighter, more meaningful first experience.",
+          },
+          {
+            decision: "Show money throughout.",
+            why: "Money is the emotional core of investing; keeping cash and portfolio value visible at all times preserves the exact feelings — hesitation, greed, fear — the experience is trying to surface.",
+            tradeoff:
+              "A visible balance invites outcome-chasing, so the reflection has to work harder to redirect attention from score to behavior.",
+          },
+          {
+            decision: "Reflect behavior instead of scoring decisions.",
+            why: "The goal is self-awareness, not a leaderboard. Showing how you allocated, concentrated, and reacted during the crash teaches more than telling someone they 'won' or 'lost'.",
+            tradeoff:
+              "Less immediately gratifying than a P&L score, and harder to design — but it's what makes the lesson stick.",
+          },
+        ],
+      },
+      {
+        heading: "Engineering implementation",
+        body: "The prototype is a self-contained React single-page application with no backend. Historical prices, events, company context, and news are encoded locally, so the experience is deterministic, fast, and deployable as a static site.",
         bullets: [
-          "A believable first experience over engine generality — the simulation is scripted, not a true market model, and that's a conscious sequencing choice.",
-          "Hid profit-and-loss during play even though it dampens the obvious dopamine, because showing it would reinforce the exact bias the product exists to correct.",
-          "Behavioral instrumentation over content volume — one tight 3-day campaign instrumented deeply beats a large shallow one for proving the loop changes behavior.",
-          "Scoped as an educational simulation, not advice: no tips, no expected returns — which limits 'usefulness' claims but keeps it honest and safe.",
+          "A React state machine drives the three phases: intro → trade → reflect.",
+          "A local historical dataset holds real split-adjusted prices, valuation labels, news, and sentiment for each moment.",
+          "Transaction and portfolio state track every buy, sell, and cash position through the era.",
+          "Behavioral metrics — reallocation count, biggest concentration, crash-time behavior — are derived from the player's own actions.",
+          "SVG sparklines render each company's price history inline.",
+          "Animated number transitions bring portfolio changes to life.",
+          "The whole thing ships as a CSP-safe static site.",
         ],
       },
       {
         heading: "Outcome",
         metrics: [
-          { value: "Playable", label: "Full core loop" },
-          { value: "Live", label: "Try it in browser" },
-          { value: "7-trait", label: "Behavioral fingerprint" },
-          { value: "Next", label: "User testing" },
+          { value: "$10,000", label: "Starting capital" },
+          { value: "5", label: "Real companies" },
+          { value: "6", label: "Historical market moments" },
+          { value: "2019–2021", label: "One complete market era" },
         ],
+        body: "The current prototype is fully playable and deployed. My next focus is making discovery, pacing, and decision depth more engaging before expanding to additional eras.",
       },
       {
         heading: "Reflection",
-        body: "The moat was never the content — it's a loop that can prove someone's behavior changed. Financial education only works when people feel curious enough to begin, so I designed for that first and instrumented the behavior from day one.",
+        body: "Educational products fail when they optimize only for what users should learn. The harder problem is designing an experience people are willing to enter, continue, and reflect on. Here, gameplay isn't decoration around the lesson — it is the delivery mechanism.",
       },
     ],
   },

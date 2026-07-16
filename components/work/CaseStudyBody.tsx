@@ -71,12 +71,17 @@ export default function CaseStudyBody({ study }: { study: CaseStudy }) {
               </p>
             )}
 
-            {/* Any other prose section (Architecture, etc.) */}
-            {section.body && !isProblem && !isReflection && !isRole && (
-              <p className="mt-3 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-                {section.body}
-              </p>
-            )}
+            {/* Any other prose section (Architecture, etc.).
+                Sections with metrics render their body *below* the numbers instead. */}
+            {section.body &&
+              !isProblem &&
+              !isReflection &&
+              !isRole &&
+              !section.metrics && (
+                <p className="mt-3 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+                  {section.body}
+                </p>
+              )}
 
             {/* Bullet sections (Constraints, Tradeoffs) */}
             {section.bullets && (
@@ -93,6 +98,32 @@ export default function CaseStudyBody({ study }: { study: CaseStudy }) {
                   </li>
                 ))}
               </ul>
+            )}
+
+            {/* Repeatable loop: numbered vertical flow with connectors */}
+            {section.flow && (
+              <ol className="mt-5">
+                {section.flow.map((f, j) => (
+                  <li key={j} className="relative flex gap-4 pb-6 last:pb-0">
+                    {j < section.flow!.length - 1 && (
+                      <span className="absolute left-[15px] top-9 bottom-0 w-px bg-slate-200 dark:bg-gray-800" />
+                    )}
+                    <span
+                      className={`relative z-10 flex h-8 w-8 flex-none items-center justify-center rounded-full border bg-white dark:bg-gray-950 text-sm font-bold tabular-nums ${accentBorder[accent]} ${accentText[accent]}`}
+                    >
+                      {j + 1}
+                    </span>
+                    <div className="pt-1">
+                      <p className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                        {f.step}
+                      </p>
+                      <p className="mt-1 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-400">
+                        {f.detail}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             )}
 
             {/* Key engineering decisions: numbered Decision → Why → Tradeoff cards */}
@@ -225,6 +256,13 @@ export default function CaseStudyBody({ study }: { study: CaseStudy }) {
                   </div>
                 ))}
               </div>
+            )}
+
+            {/* Forward-looking note that belongs *under* the metric cards */}
+            {section.metrics && section.body && (
+              <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+                {section.body}
+              </p>
             )}
 
             {section.showDiagram && study.diagram && (
