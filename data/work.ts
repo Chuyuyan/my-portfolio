@@ -20,6 +20,8 @@ export type CaseStudy = {
   summary: string;
   /** Category label shown above the title (e.g. "Healthcare AI"). */
   kicker: string;
+  /** Low-saturation accent color that gives each case study its own identity. */
+  accent: "blue" | "amber" | "violet" | "emerald";
   year: string;
   role?: string;
   /** Current status, e.g. "Playable prototype" or "Deployed in production". */
@@ -37,6 +39,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "clinical-report-qa",
     title: "Arthur Health QAS",
     kicker: "AI Systems · Healthcare · Platform Engineering",
+    accent: "blue",
     tagline:
       "A multi-agent platform that turns unstructured clinical reports into structured, evidence-grounded quality reviews.",
     summary:
@@ -104,6 +107,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "investment-time-machine",
     title: "Investment Time Machine",
     kicker: "Product Design · Interactive Learning · Finance",
+    accent: "amber",
     tagline:
       "A playable learning experience that helps beginners build confidence through discovery, evidence, and their own decisions.",
     summary:
@@ -162,6 +166,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "code-search",
     title: "Code Search & Developer Tooling",
     kicker: "Developer Tools · Search · Full Stack",
+    accent: "violet",
     tagline:
       "A hybrid code search system combining semantic retrieval, AST indexing, and in-editor workflows.",
     summary:
@@ -223,6 +228,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "hospital-automation",
     title: "Hospital Integration Automation",
     kicker: "Automation · Healthcare Ops · Reliability",
+    accent: "emerald",
     tagline:
       "Freeing patient data trapped in isolated hospital intranets — reliably, at production scale.",
     summary:

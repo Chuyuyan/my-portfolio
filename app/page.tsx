@@ -11,10 +11,10 @@ const socials = [
 ];
 
 const proofPoints = [
-  "3 internships",
-  "60+ real clinical reports",
-  "5× latency reduction",
-  "2,000+ repositories indexed",
+  "1,000+ concurrent users",
+  "2,000+ repos indexed",
+  "5× faster",
+  "99.9% uptime",
 ];
 
 const flow = ["Unstructured input", "Structured system", "Actionable outcome"];
@@ -69,7 +69,7 @@ export default function Home() {
         />
         <Container size="md" className="relative flex min-h-[88vh] flex-col justify-center py-24">
           <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-            Chuyu Yan · Software Engineer
+            Chuyu Yan
           </p>
 
           <h1 className="mt-6 max-w-4xl text-4xl sm:text-6xl font-bold leading-[1.05] tracking-tight text-slate-900 dark:text-white">
@@ -79,8 +79,12 @@ export default function Home() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Software Engineer at the University of Waterloo, building reliable AI
-            platforms, developer tools, and interactive learning products.
+            Building reliable AI systems, developer tools, and products that
+            simplify complex decisions.
+          </p>
+
+          <p className="mt-4 text-sm font-medium text-slate-400 dark:text-slate-500">
+            Computer Engineering @ University of Waterloo
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">

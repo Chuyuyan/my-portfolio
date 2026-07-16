@@ -18,9 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chuyu Yan — Software Engineer",
+  title: "Chuyu Yan — Computer Engineer",
   description:
-    "Chuyu Yan — software engineer focused on automation, document intelligence, and AI/LLM systems.",
+    "Chuyu Yan — Computer Engineering at the University of Waterloo, building reliable AI systems, developer tools, and interactive learning products.",
 };
 
 export default function RootLayout({
