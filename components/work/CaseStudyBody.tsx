@@ -37,6 +37,35 @@ export default function CaseStudyBody({ study }: { study: CaseStudy }) {
             </ul>
           )}
 
+          {section.decisions && (
+            <div className="mt-4 space-y-4">
+              {section.decisions.map((d, j) => (
+                <div
+                  key={j}
+                  className="rounded-xl border border-slate-200 dark:border-gray-800 bg-slate-50/60 dark:bg-gray-900/40 p-5 sm:p-6"
+                >
+                  <p className="text-lg font-semibold leading-snug text-slate-900 dark:text-slate-100">
+                    {d.decision}
+                  </p>
+                  <div className="mt-4 space-y-3 text-base leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-300">
+                      <span className="mr-2 text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                        Why
+                      </span>
+                      {d.why}
+                    </p>
+                    <p className="text-slate-600 dark:text-slate-300">
+                      <span className="mr-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                        Tradeoff
+                      </span>
+                      {d.tradeoff}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {section.showDiagram && study.diagram && (
             <Diagram kind={study.diagram} />
           )}
