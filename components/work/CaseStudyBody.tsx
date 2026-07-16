@@ -134,6 +134,78 @@ export default function CaseStudyBody({ study }: { study: CaseStudy }) {
               </div>
             )}
 
+            {/* Why this is difficult: labelled difficulty cards */}
+            {section.cards && (
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {section.cards.map((c, j) => (
+                  <div
+                    key={j}
+                    className="rounded-xl border border-slate-200 dark:border-gray-800 bg-slate-50/60 dark:bg-gray-900/40 p-5"
+                  >
+                    <div className="flex items-baseline gap-2.5">
+                      <span
+                        className={`h-1.5 w-1.5 flex-none translate-y-[-1px] rounded-full ${accentDot[accent]}`}
+                      />
+                      <p className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                        {c.title}
+                      </p>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                      {c.note}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Before / after comparison */}
+            {section.comparison && (
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border border-slate-200 dark:border-gray-800 bg-slate-50/60 dark:bg-gray-900/40 p-5 sm:p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    Before
+                  </p>
+                  <p className="mt-1 text-base font-semibold text-slate-700 dark:text-slate-200">
+                    {section.comparison.before.label}
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {section.comparison.before.points.map((p, j) => (
+                      <li
+                        key={j}
+                        className="flex gap-2.5 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+                      >
+                        <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-slate-300 dark:bg-gray-600" />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div
+                  className={`rounded-xl border bg-slate-50/60 dark:bg-gray-900/40 p-5 sm:p-6 ${accentBorder[accent]}`}
+                >
+                  <p
+                    className={`text-xs font-semibold uppercase tracking-wider ${accentText[accent]}`}
+                  >
+                    After
+                  </p>
+                  <p className="mt-1 text-base font-semibold text-slate-900 dark:text-slate-100">
+                    {section.comparison.after.label}
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {section.comparison.after.points.map((p, j) => (
+                      <li
+                        key={j}
+                        className="flex gap-2.5 text-sm leading-relaxed text-slate-700 dark:text-slate-300"
+                      >
+                        <span className={`mt-1.5 h-1.5 w-1.5 flex-none rounded-full ${accentDot[accent]}`} />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+
             {/* Outcome: big-number metric cards a recruiter can read at a glance */}
             {section.metrics && (
               <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">

@@ -21,6 +21,18 @@ export type Metric = {
   label: string;
 };
 
+/** A dimension of difficulty, shown as a labelled card (used by "Why this is difficult"). */
+export type ChallengeCard = {
+  title: string;
+  note: string;
+};
+
+/** A before/after comparison that shows the value of a decision at a glance. */
+export type Comparison = {
+  before: { label: string; points: string[] };
+  after: { label: string; points: string[] };
+};
+
 export type WorkSection = {
   heading: string;
   body?: string;
@@ -29,6 +41,10 @@ export type WorkSection = {
   decisions?: Decision[];
   /** Big number + label cards (used by "Outcome"). */
   metrics?: Metric[];
+  /** Labelled difficulty cards (used by "Why this is difficult"). */
+  cards?: ChallengeCard[];
+  /** A before/after comparison block. */
+  comparison?: Comparison;
   /** Render the case study's architecture diagram inside this section. */
   showDiagram?: boolean;
 };
@@ -37,8 +53,10 @@ export type CaseStudy = {
   slug: string;
   /** Short internal title (nav, cards). */
   title: string;
-  /** Big product-style one-liner shown on the card and case-study hero. */
+  /** Big product-style one-liner shown on the work index card. */
   tagline: string;
+  /** The soul of the project — "what makes this interesting", led with on the case-study hero. */
+  angle: string;
   /** One-sentence "what it is". */
   summary: string;
   /** Category label shown above the title (e.g. "Healthcare AI"). */
@@ -65,6 +83,7 @@ export const caseStudies: CaseStudy[] = [
     accent: "blue",
     tagline:
       "A multi-agent platform that turns unstructured clinical reports into structured, evidence-grounded quality reviews.",
+    angle: "Making unreliable AI reliable enough for healthcare.",
     summary:
       "An end-to-end quality-assurance platform that ingests messy clinical documents, strips patient identifiers, and runs parallel LLM agents to produce grounded, reviewable recommendations.",
     year: "2026",
@@ -85,12 +104,24 @@ export const caseStudies: CaseStudy[] = [
         body: "Clinical reports need manual quality review — expensive, inconsistent, and impossible to do at scale. Every report arrives as an unstructured document full of protected health information (PHI), and no human can read them all.",
       },
       {
-        heading: "The constraints",
-        bullets: [
-          "PHI cannot leak — but clinician and clinic information must be preserved, so naive redaction over-deletes exactly the context reviewers need.",
-          "LLM output is non-deterministic, yet downstream agents depend on stable contracts and a QA tool can't give different answers on reruns.",
-          "Azure APIs impose rate limits, so a fan-out of agents can't just hammer the endpoint.",
-          "OCR output is structurally inconsistent, including broken table layouts that later stages can't trust.",
+        heading: "Why this is difficult",
+        cards: [
+          {
+            title: "Sensitive data",
+            note: "PHI must be stripped — but clinician and clinic context has to survive, so naive redaction deletes exactly what reviewers need.",
+          },
+          {
+            title: "Messy documents",
+            note: "OCR output is structurally inconsistent, with broken tables that later stages can't trust.",
+          },
+          {
+            title: "Non-deterministic LLMs",
+            note: "Models answer differently on reruns, yet downstream agents need stable contracts and a QA tool can't contradict itself.",
+          },
+          {
+            title: "Clinical safety",
+            note: "Every recommendation has to trace back to evidence a human reviewer can audit.",
+          },
         ],
       },
       {
@@ -132,6 +163,27 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
+        heading: "PHI redaction: before vs. after",
+        comparison: {
+          before: {
+            label: "Generic PHI detection",
+            points: [
+              "Wrong person removed",
+              "Clinic phone number stripped",
+              "Patient nickname missed",
+            ],
+          },
+          after: {
+            label: "Identity anchoring",
+            points: [
+              "Only the correct worker removed",
+              "Clinic context preserved",
+              "Aliases matched and handled",
+            ],
+          },
+        },
+      },
+      {
         heading: "Tradeoffs",
         bullets: [
           "Precision over recall on redaction: the system would rather keep a borderline token and flag it than silently delete context a reviewer needs.",
@@ -162,6 +214,7 @@ export const caseStudies: CaseStudy[] = [
     accent: "amber",
     tagline:
       "A playable learning experience that helps beginners build confidence through discovery, evidence, and their own decisions.",
+    angle: "Teaching investing by changing behavior — not by teaching knowledge.",
     summary:
       "An educational simulation — a pixel-art game where you relive real market history, decide under genuine uncertainty, then a Decision Autopsy reveals the behavioral biases you couldn't see in the moment. Not financial advice; a learning experience.",
     year: "2026",
@@ -175,12 +228,24 @@ export const caseStudies: CaseStudy[] = [
         body: "Beginners don't fail on facts — they fail on behavior: FOMO, panic-selling, overconfidence. Courses teach concepts, but the people who most need help are allergic to courses, and no one ever shows them their own behavior.",
       },
       {
-        heading: "The constraints",
-        bullets: [
-          "It has to feel like a game, not homework — no finance jargon in the core loop.",
-          "Hide profit-and-loss during play, or players judge decisions by outcome — the exact bias the product fights.",
-          "Learning has to transfer to real investing, and complexity must increase gradually.",
-          "It's a learning experience, not financial advice: no stock tips, no expected returns, no promise of beating the market.",
+        heading: "Why this is difficult",
+        cards: [
+          {
+            title: "Behavior, not facts",
+            note: "Beginners fail on psychology — FOMO, panic, overconfidence — not on missing knowledge.",
+          },
+          {
+            title: "Course-averse audience",
+            note: "The people who most need help won't sit through a finance course.",
+          },
+          {
+            title: "Invisible bias",
+            note: "No one ever shows a beginner their own decision-making, so the failure stays invisible.",
+          },
+          {
+            title: "Honest and safe",
+            note: "It has to teach real behavior without ever giving financial advice.",
+          },
         ],
       },
       {
@@ -251,6 +316,7 @@ export const caseStudies: CaseStudy[] = [
     accent: "violet",
     tagline:
       "A hybrid code search system combining semantic retrieval, AST indexing, and in-editor workflows.",
+    angle: "Helping developers find intent, not just files.",
     summary:
       "A production hybrid search platform combining keyword and vector retrieval over thousands of repositories, served to 1,000+ concurrent users with multi-tenant security.",
     year: "2025",
@@ -264,12 +330,24 @@ export const caseStudies: CaseStudy[] = [
         body: "In an organization with thousands of repositories, no one can navigate by memory. Keyword search misses code that's semantically related but lexically different — people needed to search by meaning and get ranked, relevant code back.",
       },
       {
-        heading: "The constraints",
-        bullets: [
-          "Serve 1,000+ concurrent users on infrastructure that had to stay cheap.",
-          "Index 2,000+ repositories and 50k+ code chunks, with incremental updates rather than full rebuilds.",
-          "Multi-tenant: each team's code isolated and access-controlled.",
-          "LLM API cost had to be controlled or the whole thing was unaffordable.",
+        heading: "Why this is difficult",
+        cards: [
+          {
+            title: "Meaning vs. keywords",
+            note: "The code you want is often lexically different from the words you'd search for.",
+          },
+          {
+            title: "Scale",
+            note: "2,000+ repositories and 50k+ code chunks — far past what anyone navigates by memory.",
+          },
+          {
+            title: "Multi-tenant",
+            note: "Each team's code has to stay isolated and access-controlled.",
+          },
+          {
+            title: "Cost",
+            note: "LLM calls at 1,000+ concurrent users have to stay affordable, or the tool dies.",
+          },
         ],
       },
       {
@@ -340,6 +418,7 @@ export const caseStudies: CaseStudy[] = [
     accent: "emerald",
     tagline:
       "Freeing patient data trapped in isolated hospital intranets — reliably, at production scale.",
+    angle: "Replacing repetitive clinical workflows without disrupting operations.",
     summary:
       "A Selenium automation system that migrates structured patient data from an isolated hospital intranet into third-party platforms, deployed in production at a Grade III Class A hospital.",
     year: "2025",
@@ -352,11 +431,20 @@ export const caseStudies: CaseStudy[] = [
         body: "Patient data was trapped inside an isolated hospital intranet, re-entered by hand into third-party platforms — slow, error-prone, unscalable. In healthcare, a transcription error isn't annoying, it's dangerous.",
       },
       {
-        heading: "The constraints",
-        bullets: [
-          "Internal web interfaces were unstable and not built for automation.",
-          "Each record spanned 20–30 heterogeneous fields needing type conversion and validation.",
-          "Data integrity was non-negotiable — this ran in production at a Grade III Class A hospital.",
+        heading: "Why this is difficult",
+        cards: [
+          {
+            title: "No API",
+            note: "Data was locked behind an unstable intranet UI never built for automation.",
+          },
+          {
+            title: "Heterogeneous records",
+            note: "Each record spanned 20–30 fields needing type conversion and validation.",
+          },
+          {
+            title: "Zero tolerance",
+            note: "A single bad write in a Grade III Class A hospital is dangerous, not just annoying.",
+          },
         ],
       },
       {
