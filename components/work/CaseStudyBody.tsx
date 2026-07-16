@@ -8,69 +8,159 @@ function Diagram({ kind }: { kind: CaseStudy["diagram"] }) {
   return null;
 }
 
+// Per-study accent — the only color allowed to draw the eye.
+const accentText: Record<CaseStudy["accent"], string> = {
+  blue: "text-blue-600 dark:text-blue-400",
+  amber: "text-amber-600 dark:text-amber-400",
+  violet: "text-violet-600 dark:text-violet-400",
+  emerald: "text-emerald-600 dark:text-emerald-400",
+};
+
+const accentBorder: Record<CaseStudy["accent"], string> = {
+  blue: "border-blue-500/70 dark:border-blue-400/70",
+  amber: "border-amber-500/70 dark:border-amber-400/70",
+  violet: "border-violet-500/70 dark:border-violet-400/70",
+  emerald: "border-emerald-500/70 dark:border-emerald-400/70",
+};
+
+const accentDot: Record<CaseStudy["accent"], string> = {
+  blue: "bg-blue-500/70",
+  amber: "bg-amber-500/70",
+  violet: "bg-violet-500/70",
+  emerald: "bg-emerald-500/70",
+};
+
 export default function CaseStudyBody({ study }: { study: CaseStudy }) {
+  const accent = study.accent;
+
   return (
-    <div className="space-y-12">
-      {study.sections.map((section, i) => (
-        <section key={i}>
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-            {section.heading}
-          </h2>
+    <div className="space-y-16">
+      {study.sections.map((section, i) => {
+        const heading = section.heading.trim().toLowerCase();
+        const isProblem = heading === "the problem";
+        const isReflection = heading === "reflection";
+        const isRole = heading === "my role";
 
-          {section.body && (
-            <p className="mt-3 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-              {section.body}
-            </p>
-          )}
+        return (
+          <section key={i}>
+            {/* Muted eyebrow — no more wall of blue headings */}
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
+              {section.heading}
+            </h2>
 
-          {section.bullets && (
-            <ul className="mt-3 space-y-2.5">
-              {section.bullets.map((b, j) => (
-                <li
-                  key={j}
-                  className="flex gap-3 text-lg leading-relaxed text-slate-700 dark:text-slate-300"
-                >
-                  <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-blue-500/70" />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+            {/* Problem: a single large lead statement */}
+            {isProblem && section.body && (
+              <p className="mt-4 text-xl sm:text-2xl font-medium leading-relaxed text-slate-800 dark:text-slate-100">
+                {section.body}
+              </p>
+            )}
 
-          {section.decisions && (
-            <div className="mt-4 space-y-4">
-              {section.decisions.map((d, j) => (
-                <div
-                  key={j}
-                  className="rounded-xl border border-slate-200 dark:border-gray-800 bg-slate-50/60 dark:bg-gray-900/40 p-5 sm:p-6"
-                >
-                  <p className="text-lg font-semibold leading-snug text-slate-900 dark:text-slate-100">
-                    {d.decision}
-                  </p>
-                  <div className="mt-4 space-y-3 text-base leading-relaxed">
-                    <p className="text-slate-600 dark:text-slate-300">
-                      <span className="mr-2 text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                        Why
+            {/* Reflection: short pull-quote */}
+            {isReflection && section.body && (
+              <blockquote className={`mt-4 border-l-2 pl-6 ${accentBorder[accent]}`}>
+                <p className="text-xl sm:text-2xl font-medium leading-relaxed text-slate-800 dark:text-slate-100">
+                  {section.body}
+                </p>
+              </blockquote>
+            )}
+
+            {/* My role: intentionally quiet — it's context, not the headline */}
+            {isRole && section.body && (
+              <p className="mt-3 text-base leading-relaxed text-slate-500 dark:text-slate-400">
+                {section.body}
+              </p>
+            )}
+
+            {/* Any other prose section (Architecture, etc.) */}
+            {section.body && !isProblem && !isReflection && !isRole && (
+              <p className="mt-3 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+                {section.body}
+              </p>
+            )}
+
+            {/* Bullet sections (Constraints, Tradeoffs) */}
+            {section.bullets && (
+              <ul className="mt-4 space-y-2.5">
+                {section.bullets.map((b, j) => (
+                  <li
+                    key={j}
+                    className="flex gap-3 text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300"
+                  >
+                    <span
+                      className={`mt-2 h-1.5 w-1.5 flex-none rounded-full ${accentDot[accent]}`}
+                    />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Key engineering decisions: numbered Decision → Why → Tradeoff cards */}
+            {section.decisions && (
+              <div className="mt-5 space-y-3">
+                {section.decisions.map((d, j) => (
+                  <div
+                    key={j}
+                    className="rounded-xl border border-slate-200 dark:border-gray-800 bg-slate-50/60 dark:bg-gray-900/40 p-5 sm:p-6"
+                  >
+                    <div className="flex items-baseline gap-3">
+                      <span
+                        className={`text-sm font-bold tabular-nums ${accentText[accent]}`}
+                      >
+                        {String(j + 1).padStart(2, "0")}
                       </span>
-                      {d.why}
-                    </p>
-                    <p className="text-slate-600 dark:text-slate-300">
-                      <span className="mr-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                        Tradeoff
-                      </span>
-                      {d.tradeoff}
-                    </p>
+                      <p className="text-lg font-semibold leading-snug text-slate-900 dark:text-slate-100">
+                        {d.decision}
+                      </p>
+                    </div>
+                    <div className="mt-3 space-y-2 pl-8 text-base leading-relaxed">
+                      <p className="text-slate-600 dark:text-slate-300">
+                        <span
+                          className={`mr-2 text-xs font-semibold uppercase tracking-wider ${accentText[accent]}`}
+                        >
+                          Why
+                        </span>
+                        {d.why}
+                      </p>
+                      <p className="text-slate-600 dark:text-slate-300">
+                        <span className="mr-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                          Tradeoff
+                        </span>
+                        {d.tradeoff}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
 
-          {section.showDiagram && study.diagram && (
-            <Diagram kind={study.diagram} />
-          )}
-        </section>
-      ))}
+            {/* Outcome: big-number metric cards a recruiter can read at a glance */}
+            {section.metrics && (
+              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {section.metrics.map((m, j) => (
+                  <div
+                    key={j}
+                    className="rounded-xl border border-slate-200 dark:border-gray-800 bg-slate-50/60 dark:bg-gray-900/40 p-5"
+                  >
+                    <div
+                      className={`text-3xl sm:text-4xl font-bold tracking-tight ${accentText[accent]}`}
+                    >
+                      {m.value}
+                    </div>
+                    <div className="mt-1.5 text-sm leading-snug text-slate-500 dark:text-slate-400">
+                      {m.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {section.showDiagram && study.diagram && (
+              <Diagram kind={study.diagram} />
+            )}
+          </section>
+        );
+      })}
     </div>
   );
 }

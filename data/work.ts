@@ -13,12 +13,22 @@ export type Decision = {
   tradeoff: string;
 };
 
+/** A single headline metric, shown as a big number + label card. */
+export type Metric = {
+  /** The number or short value, e.g. "5×" or "99.9%". */
+  value: string;
+  /** What it measures, e.g. "Lower latency". */
+  label: string;
+};
+
 export type WorkSection = {
   heading: string;
   body?: string;
   bullets?: string[];
   /** Structured Decision → Why → Tradeoff cards (used by "Key engineering decisions"). */
   decisions?: Decision[];
+  /** Big number + label cards (used by "Outcome"). */
+  metrics?: Metric[];
   /** Render the case study's architecture diagram inside this section. */
   showDiagram?: boolean;
 };
@@ -72,7 +82,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: "The problem",
-        body: "Clinical assessment reports require manual quality review, but the existing workflow is expensive, inconsistent, and can't check every rubric criterion or catch contradictions between sections. Reports arrive as unstructured documents full of protected health information (PHI), and there's no reliable way to evaluate their quality at scale without a human reading every one.",
+        body: "Clinical reports need manual quality review — expensive, inconsistent, and impossible to do at scale. Every report arrives as an unstructured document full of protected health information (PHI), and no human can read them all.",
       },
       {
         heading: "The constraints",
@@ -132,16 +142,16 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Outcome",
-        bullets: [
-          "60+ real clinical reports used in internal testing.",
-          "Completed an internal leadership demo; preparing for pilot.",
-          "Up to 5× reduction in recommendation-stage latency.",
-          "Reduced dependence on manual QA review.",
+        metrics: [
+          { value: "60+", label: "Clinical reports tested" },
+          { value: "5×", label: "Lower latency" },
+          { value: "Pilot", label: "Preparing to deploy" },
+          { value: "Human", label: "Review preserved" },
         ],
       },
       {
         heading: "Reflection",
-        body: "Reliable AI systems come less from choosing one perfect model and more from designing the contracts, fallbacks, evaluations, and human-review boundaries around imperfect components. In healthcare AI the model is the easy part — trust comes from the boring stages around it: correct redaction, deterministic outputs, and evidence you can point back to.",
+        body: "Reliable AI isn't built by choosing one perfect model. It's built by designing the contracts, guardrails, and review process around imperfect ones — correct redaction, deterministic outputs, evidence you can point back to.",
       },
     ],
   },
@@ -162,7 +172,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: "The problem",
-        body: "Many beginners know they should start investing, but fear and complexity stop them from taking the first step. And when they do start, they don't fail on facts — they fail on behavior: FOMO, panic-selling, overconfidence. Traditional courses teach concepts, yet the people who most need help are allergic to courses, and nobody ever shows them their own behavior.",
+        body: "Beginners don't fail on facts — they fail on behavior: FOMO, panic-selling, overconfidence. Courses teach concepts, but the people who most need help are allergic to courses, and no one ever shows them their own behavior.",
       },
       {
         heading: "The constraints",
@@ -221,15 +231,16 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Outcome",
-        bullets: [
-          "Playable end-to-end prototype with the core loop fully implemented.",
-          "Deployed as a web experience anyone can try.",
-          "User testing planned; next focus is discovery, pacing, and decision depth.",
+        metrics: [
+          { value: "Playable", label: "Full core loop" },
+          { value: "Live", label: "Try it in browser" },
+          { value: "7-trait", label: "Behavioral fingerprint" },
+          { value: "Next", label: "User testing" },
         ],
       },
       {
         heading: "Reflection",
-        body: "Product delivery matters as much as product intent — financial education only works when users feel curious enough to begin. And the moat was never the content; it's the behavioral data plus a loop that can actually prove someone changed, so instrument it from day one even if you don't show it yet.",
+        body: "The moat was never the content — it's a loop that can prove someone's behavior changed. Financial education only works when people feel curious enough to begin, so I designed for that first and instrumented the behavior from day one.",
       },
     ],
   },
@@ -250,7 +261,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: "The problem",
-        body: "Developers waste time navigating fragmented repositories, switching between keyword search, documentation, and code structure. Keyword search misses code that's semantically related but lexically different, and a large organization has thousands of repositories nobody can navigate by memory. People needed to ask questions by meaning and get ranked, relevant code back.",
+        body: "In an organization with thousands of repositories, no one can navigate by memory. Keyword search misses code that's semantically related but lexically different — people needed to search by meaning and get ranked, relevant code back.",
       },
       {
         heading: "The constraints",
@@ -309,16 +320,16 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Outcome",
-        bullets: [
-          "Indexed 2,000+ repositories and 50k+ code chunks.",
-          "60% improvement in retrieval accuracy over keyword-only search.",
-          "Served 1,000+ concurrent users at 99.9% uptime (Docker + Gunicorn + Nginx).",
-          "40% reduction in LLM API cost.",
+        metrics: [
+          { value: "2,000+", label: "Repos indexed" },
+          { value: "60%", label: "Better retrieval" },
+          { value: "1,000+", label: "Concurrent users" },
+          { value: "99.9%", label: "Uptime" },
         ],
       },
       {
         heading: "Reflection",
-        body: "Hybrid retrieval beats clever single-method search in the real world, and most of the engineering effort in an \"AI feature\" is actually cost control, caching, and multi-tenancy — not the model call itself. Developer tools are also most valuable when they fit an existing workflow instead of forcing users into a separate interface.",
+        body: "Most of the engineering in an \"AI feature\" is cost control, caching, and multi-tenancy — not the model call. And a developer tool only earns its keep when it fits the workflow people already have.",
       },
     ],
   },
@@ -338,7 +349,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: "The problem",
-        body: "Patient data was trapped inside an isolated hospital intranet, and staff re-entered it by hand into third-party case-management platforms — slow, error-prone, and unscalable. In healthcare, a transcription error isn't just annoying, it's dangerous.",
+        body: "Patient data was trapped inside an isolated hospital intranet, re-entered by hand into third-party platforms — slow, error-prone, unscalable. In healthcare, a transcription error isn't annoying, it's dangerous.",
       },
       {
         heading: "The constraints",
@@ -389,15 +400,16 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Outcome",
-        bullets: [
-          "Migrated 800+ patient records at 99.5% data integrity.",
-          "Lifted throughput from ~30 to 200 records per day.",
-          "73% reduction in per-record processing time.",
+        metrics: [
+          { value: "800+", label: "Records migrated" },
+          { value: "99.5%", label: "Data integrity" },
+          { value: "73%", label: "Faster per record" },
+          { value: "30→200", label: "Records per day" },
         ],
       },
       {
         heading: "Reflection",
-        body: "Automation in a high-stakes environment is mostly about failure handling, not the happy path. The rollback and validation layers were what made anyone trust it enough to run in production.",
+        body: "Automation in a high-stakes environment is mostly failure handling, not the happy path. The rollback and validation layers are what earned enough trust to run in production.",
       },
     ],
   },

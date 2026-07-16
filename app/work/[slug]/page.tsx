@@ -3,7 +3,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import CaseStudyBody from "@/components/work/CaseStudyBody";
+import type { CaseStudy } from "@/data/work";
 import { caseStudies, getCaseStudy } from "@/data/work";
+
+const accentText: Record<CaseStudy["accent"], string> = {
+  blue: "text-blue-600 dark:text-blue-400",
+  amber: "text-amber-600 dark:text-amber-400",
+  violet: "text-violet-600 dark:text-violet-400",
+  emerald: "text-emerald-600 dark:text-emerald-400",
+};
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -48,7 +56,7 @@ export default async function CaseStudyPage({
 
         {/* Hero */}
         <header className="mt-8 border-b border-slate-200 dark:border-gray-800 pb-10">
-          <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+          <p className={`text-xs font-semibold uppercase tracking-wider ${accentText[study.accent]}`}>
             {study.kicker}
           </p>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
