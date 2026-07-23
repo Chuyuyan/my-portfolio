@@ -17,8 +17,6 @@ const proofPoints = [
   "99.9% uptime",
 ];
 
-const flow = ["Unstructured input", "Structured system", "Actionable outcome"];
-
 const experienceSnapshot = [
   {
     company: "Arthur Health",
@@ -68,28 +66,20 @@ export default function Home() {
           className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[36rem] w-[36rem] rounded-full bg-blue-500/10 dark:bg-blue-500/10 blur-3xl"
         />
         <Container size="md" className="relative flex min-h-[88vh] flex-col justify-center py-24">
-          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-            Chuyu Yan
-          </p>
-
-          <h1 className="mt-6 max-w-4xl text-4xl sm:text-6xl font-bold leading-[1.05] tracking-tight text-slate-900 dark:text-white">
-            I build systems that make{" "}
-            <span className="text-blue-600 dark:text-blue-400">complex problems</span>{" "}
-            approachable.
+          <h1 className="max-w-4xl text-4xl sm:text-6xl font-bold leading-[1.05] tracking-tight text-slate-900 dark:text-white">
+            Hi, I&apos;m Chuyu.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Building reliable AI systems, developer tools, and products that
-            simplify complex decisions.
+            Computer Engineering student at the University of Waterloo.
           </p>
 
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-500 dark:text-slate-400">
-            <span className="font-medium text-blue-600 dark:text-blue-400">Currently</span>{" "}
-            exploring how games can teach people to invest.
-          </p>
-
-          <p className="mt-4 text-sm font-medium text-slate-400 dark:text-slate-500">
-            Computer Engineering @ University of Waterloo
+          <p className="mt-4 max-w-2xl text-lg sm:text-xl leading-relaxed text-slate-600 dark:text-slate-300">
+            Currently building{" "}
+            <span className="font-medium text-blue-600 dark:text-blue-400">
+              Investment Time Machine
+            </span>
+            . Previously at Arthur Health.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -111,26 +101,7 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Light, static "system flow" visual — reinforces the thesis without motion */}
-          <div className="mt-14 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-2 text-sm font-medium">
-            {flow.map((step, i) => (
-              <div key={step} className="flex items-center gap-3 sm:gap-2">
-                <span className="rounded-lg border border-slate-200 dark:border-gray-800 bg-slate-50/70 dark:bg-gray-900/50 px-4 py-2 text-slate-700 dark:text-slate-200">
-                  {step}
-                </span>
-                {i < flow.length - 1 && (
-                  <span
-                    aria-hidden
-                    className="rotate-90 text-blue-500 dark:text-blue-400 sm:mx-1 sm:rotate-0"
-                  >
-                    →
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-500 dark:text-slate-400">
+          <div className="mt-12 flex flex-wrap gap-6 text-sm text-slate-500 dark:text-slate-400">
             {socials.map((s) => (
               <a
                 key={s.label}
