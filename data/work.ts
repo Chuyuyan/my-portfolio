@@ -109,7 +109,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: "The problem",
-        body: "Clinical reports need manual quality review — expensive, inconsistent, and impossible to do at scale. Every report arrives as an unstructured document full of protected health information (PHI), and no human can read them all.",
+        body: "Clinical documents look structured — until they aren't. Tables break, names surface in unexpected places, and one wrong redaction can remove the wrong person. Yet every report still needs quality review — manual, expensive, inconsistent, and impossible to do at scale.",
       },
       {
         heading: "Why this is difficult",
@@ -233,7 +233,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: "The problem",
-        body: "Many beginners already know they should start investing, yet still hesitate. The barrier isn't always missing information — it's the fear of making the wrong decision with real money. I wanted to make that first decision safe to practice, without making it feel like homework.",
+        body: "I knew I should start investing. I just never felt ready. The barrier was never missing information — it was the fear of making the wrong call with real money, and never having a safe place to practice uncertainty, tradeoffs, and position sizing before the stakes got real.",
       },
       {
         heading: "Why a game?",
@@ -379,7 +379,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: "The problem",
-        body: "In an organization with thousands of repositories, no one can navigate by memory. Keyword search misses code that's semantically related but lexically different — people needed to search by meaning and get ranked, relevant code back.",
+        body: "You know the function exists. You just can't remember what it's called, or which of two thousand repos it lives in. Keyword search only finds the words you already know — not the code you're actually looking for. People needed to search by meaning and get ranked, relevant code back.",
       },
       {
         heading: "Why this is difficult",
@@ -480,7 +480,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       {
         heading: "The problem",
-        body: "Patient data was trapped inside an isolated hospital intranet, re-entered by hand into third-party platforms — slow, error-prone, unscalable. In healthcare, a transcription error isn't annoying, it's dangerous.",
+        body: "The data existed. It was just trapped — locked inside a hospital intranet with no API, re-typed by hand into another system, one record at a time. In a hospital, a typo isn't a nuisance; it's a risk to a patient.",
       },
       {
         heading: "Why this is difficult",

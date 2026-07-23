@@ -83,6 +83,11 @@ export default function Home() {
             simplify complex decisions.
           </p>
 
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-500 dark:text-slate-400">
+            <span className="font-medium text-blue-600 dark:text-blue-400">Currently</span>{" "}
+            exploring how games can teach people to invest.
+          </p>
+
           <p className="mt-4 text-sm font-medium text-slate-400 dark:text-slate-500">
             Computer Engineering @ University of Waterloo
           </p>
